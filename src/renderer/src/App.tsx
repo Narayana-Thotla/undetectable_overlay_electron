@@ -46,7 +46,6 @@ function App() {
         model: [...prevState.model, formRes]
       }))
     })
-
   }
 
   // const handlePicture = (e) => {
@@ -65,9 +64,7 @@ function App() {
         </div>
       </div>
 
-      <div
-        className="text-gray-400 text-2xl bg-transparent px-2 overflow-y-auto"
-      >
+      <div className="text-gray-400 text-2xl bg-transparent px-2 overflow-y-auto">
         <form onSubmit={handleSubmit}>
           <label htmlFor="description" className="font-sans text-[15px] font-bold">
             Enter Question:
@@ -109,24 +106,6 @@ function App() {
             {/* {answer} */}
             <PrettyCodeDisplay code={answer} />
           </div>
-
-          {/* <span className="flex items-center justify-between gap-1 mt-1">
-            <input
-              type="file"
-              id="screenshot"
-              accept="image/*"
-              onChange={(e) => setScreenshot(e.target.files?.[0] || null)}
-              // onChange={handlePicture}
-              className="w-[33%] p-[2px] rounded bg-transparent  text-sm text-gray-400 border border-gray-300"
-            />
-
-            <button
-              type="submit"
-              className="mt-2 p-[10px] w-[35%] bg-transparent text-white text-[16px] border border-gray-300 rounded-md "
-            >
-              Submit
-            </button>
-          </span> */}
         </form>
       </div>
     </>
