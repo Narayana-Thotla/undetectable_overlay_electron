@@ -65,7 +65,7 @@ function createWindow(): void {
   })
 
   ipcMain.on('window-drag-start', () => {
-    console.log('drag started !!')
+    // console.log('drag started !!')
     mainWindow.webContents.send('window-drag')
   })
 
@@ -98,18 +98,20 @@ app.whenReady().then(() => {
   // })
 
   // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  ipcMain.on('ping', () => {
+    // console.log('pong')
+  })
 
   //----------------------------------------------------------------------------------------
 
   ipcMain.on('formData', async (event, formdataTextInput, picturePath, contextObj) => {
-    console.log('formdata input text:', formdataTextInput)
-    console.log('formdata picture path:', picturePath)
+    // console.log('formdata input text:', formdataTextInput)
+    // console.log('formdata picture path:', picturePath)
     const previousContext = contextConverter(contextObj)
     // console.log('context:', previousContext)
 
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
-    console.log('gemini api key:', process.env.GEMINI_API_KEY)
+    // console.log('gemini api key:', process.env.GEMINI_API_KEY)
 
     if (formdataTextInput && !picturePath) {
       const response = await ai.models.generateContent({
@@ -117,7 +119,7 @@ app.whenReady().then(() => {
         // contents: `${formdataTextInput}`
         contents: [...previousContext, { role: 'user', parts: [{ text: formdataTextInput }] }]
       })
-      console.log('gemini response:', response.text)
+      // console.log('gemini response:', response.text)
 
       event.sender.send('formResponse', response.text)
     } else if (formdataTextInput && picturePath) {
@@ -125,6 +127,7 @@ app.whenReady().then(() => {
         encoding: 'base64'
       })
 
+      //------use the below contents if u don't want to use the context------
       // const contents = [
       //   {
       //     inlineData: {
@@ -157,13 +160,14 @@ app.whenReady().then(() => {
         model: 'gemini-2.0-flash',
         contents: contents
       })
-      console.log('picture response:', response.text)
+      // console.log('picture response:', response.text)
 
       event.sender.send('formResponse', response.text)
     } else {
       event.sender.send('formResponse', 'please provide an input either text or picture!!!')
     }
 
+    // ------just for testing purpose || templeate code-------
     // const response = await ai.models.generateContent({
     //   model: 'gemini-2.0-flash',
     //   contents: `${formdataTextInput}`

@@ -16,8 +16,8 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Description:', description)
-    console.log('Screenshot:', screenshot)
+    // console.log('Description:', description)
+    // console.log('Screenshot:', screenshot)
 
     setcontextForGemini((prevState) => ({
       ...prevState,
@@ -38,7 +38,7 @@ function App() {
     // ipcRenderer.send('formData',description);
 
     window.electron.ipcRenderer.once('formResponse', (event, formRes) => {
-      console.log('form response form main.js file:', formRes, event)
+      // console.log('form response form main.js file:', formRes, event)
 
       setanswer(formRes)
       setcontextForGemini((prevState) => ({
