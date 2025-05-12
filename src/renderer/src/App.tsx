@@ -78,6 +78,12 @@ function App() {
               setDescription(e.target.value)
               // setcontextForGemini((prevState) => ({ ...prevState, user: e.target.value }))
             }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault() // prevent newline
+                handleSubmit(e) // call your form submission handler
+              }
+            }}
             className="w-full bg-transparent rounded border-2 border-gray-500 text-[14px]  resize-y text-[rgb(205,204,204)] placeholder:text-[rgb(163,160,160)] p-1"
           />
 
